@@ -4,8 +4,8 @@ class VertexHandler {
         this.indexData = indexData
     }
     bindBuffers(gl,bufferType) {
-        var vertexBuffer = gl.createBuffer()
-        gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer)
+        this.vertexBuffer = gl.createBuffer()
+        gl.bindBuffer(gl.ARRAY_BUFFER,this.vertexBuffer)
         gl.bufferData(gl.ARRAY_BUFFER,this.vertexData,bufferType)
         gl.bindBuffer(gl.ARRAY_BUFFER,null)
         console.log("binded vertex data to buffer")
