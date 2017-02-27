@@ -14,8 +14,8 @@ var startRendering = () =>{
     c1.width = window.innerWidth*9/10
     c1.height = window.innerHeight*9/10
     gl = c1.getContext('experimental-webgl')
-    vertexHandler.bindBuffers(gl,gl.STATIC_DRAW)
-    shaderProgram.createAndlinkShaderPrograms(gl)
+    vertexHandler.bindBuffersVertex(gl,gl.STATIC_DRAW)
+    shaderProgram.createAndlinkShaderPrograms(gl,"2d")
     console.log(vertexHandler.vertexBuffer)
     pointAttribToVertexObject()
     gl.clearColor(0,1.0,0,1.0)
