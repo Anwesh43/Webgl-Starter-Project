@@ -4,6 +4,7 @@ var gl = c1.getContext('experimental-webgl')
 var vertexHandler = new VertexHandler([0.5,0.5,0.5,-0.5,-0.5,0.5])
 var shaderProgram = new ShaderProgramHandler()
 var pointAttribToVertexObject = () => {
+    gl.bindBuffer(gl.ARRAY_BUFFER,vertexHandler.vertexBuffer)
     var coordinateVal = gl.getAttribLocation(shaderProgram.program,"coordinates")
     gl.vertexAttribPointer(coordinateVal,2,gl.FLOAT,false,0,0)
     gl.enableVertexAttribArray(coordinateVal)
@@ -15,8 +16,13 @@ var startRendering = () =>{
     gl = c1.getContext('experimental-webgl')
     vertexHandler.bindBuffers(gl,gl.STATIC_DRAW)
     shaderProgram.createAndlinkShaderPrograms(gl)
-    gl.bindBuffer(gl.ARRAY_BUFFER,vertexHandler.vertexBuffer)
+    console.log(vertexHandler.vertexBuffer)
     pointAttribToVertexObject()
+    gl.clearColor(0,1.0,0,1.0)
+    gl.enable(gl.DEPTH_TEST)
+    gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT)
+    gl.viewport(0,0,canvas.width,canvas.height)
+    gl.drawArrays(gl.TRIANGLES,0,3)
 }
 startRendering()
 window.onresize = () => {
