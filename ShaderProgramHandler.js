@@ -1,6 +1,7 @@
 var frag_code = "void main(void) {\n  gl_FragColor=vec4(0.9,0.8,0.2,1);\n}"
 var vert2d_code = "attribute vec2 coordinates;\nvoid main(void){\n   gl_Position = vec4(coordinates,0.0,1.0);\n}";
 var vert3d_code = "attribute vec3 coordinates;\nvoid main(void){\n   gl_Position = vec4(coordinates,1.0);\n}";
+var vert3d_translation_code = "attribute vec3 coordinates;\nuniform vec4 translate;\nvoid main(void){\n gl_Position = vec4(coordinates,1.0)+translate;\n}"
 class ShaderProgramHandler {
     createAndCompileVertexShader(gl,mode) {
         var vert_code = "attribute vec2 coordinates;\nvoid main(void){\n   gl_Position = vec4(coordinates,0.0,1.0);\n}";
@@ -11,6 +12,9 @@ class ShaderProgramHandler {
         }
         else if(mode == "3d") {
           gl.shaderSource(this.vertexShader,vert3d_code)
+        }
+        else if(mode == "3d_translate") {
+            gl.shaderSource(this.vertexShader,vert3d_translation_code)
         }
         gl.compileShader(this.vertexShader)
         console.log("created and compiled vertex shader")
@@ -32,4 +36,5 @@ class ShaderProgramHandler {
         gl.useProgram(this.program)
         console.log("created and linked shader programs")
     }
+
 }

@@ -1,7 +1,7 @@
 var canvas = document.getElementById('c1')
 c1.style.border = "1px solid black"
 var gl = c1.getContext('experimental-webgl')
-var vertexHandler = new VertexHandler([0.5,0.5,0.5,-0.5,-0.5,0.5])
+var vertexHandler = new VertexHandler([0.2,0.2,0.2,-0.2,-0.2,0.2])
 var shaderProgram = new ShaderProgramHandler()
 var pointAttribToVertexObject = () => {
     gl.bindBuffer(gl.ARRAY_BUFFER,vertexHandler.vertexBuffer)
