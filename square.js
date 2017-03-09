@@ -17,13 +17,21 @@ var render = () => {
     var coordinateVal = gl.getAttribLocation(shaderProgramHandler.program,"coordinates")
     gl.vertexAttribPointer(coordinateVal,3,gl.FLOAT,false,0,0)
     gl.enableVertexAttribArray(coordinateVal)
-    var translateVar = gl.getUniformLocation(shaderProgramHandler.program,"translate")
-    gl.uniform4f(translateVar,0.1,0.1,0.0,0.0)
-    gl.clearColor(0,0,0,1)
-    gl.enable(gl.DEPTH_TEST)
-    gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT)
-    gl.viewport(0,0,canvas.width,canvas.height)
-    gl.drawElements(gl.TRIANGLES,vertexHandler.indexData.length,gl.UNSIGNED_SHORT,0)
+    var x = 0.1,y=0.1,dir = 1
+    setInterval(()=>{
+        var translateVar = gl.getUniformLocation(shaderProgramHandler.program,"translate")
+        gl.uniform4f(translateVar,x,y,0.0,0.0)
+        gl.clearColor(0,0,0,1)
+        gl.enable(gl.DEPTH_TEST)
+        gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT)
+        gl.viewport(0,0,canvas.width,canvas.height)
+        gl.drawElements(gl.TRIANGLES,vertexHandler.indexData.length,gl.UNSIGNED_SHORT,0)
+        x+=0.1*dir
+        y+=0.1*dir
+        if(x>=0.8 || x<=0) {
+            dir*=-1
+        }
+    },150)
 }
 window.onresize = () => {
   render()
